@@ -1,5 +1,5 @@
 pandas
-matplotlib.pyplot
-plotly.express
-plotly.graph_objects
+matplotlib
+plotly
+plotly
 streamlit
