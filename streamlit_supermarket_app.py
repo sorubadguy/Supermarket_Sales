@@ -57,7 +57,7 @@ fig2.add_trace(go.Scatter(
     x=df_loss["Item Name"],
     y=df_loss["Loss Rate (%)"],
     name="Loss Rate (%)",
-    mode="lines+markers",
+    mode="markers",
     marker=dict(color="crimson", size=8),
     yaxis="y2"
 ))
