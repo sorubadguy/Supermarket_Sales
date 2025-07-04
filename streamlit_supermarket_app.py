@@ -120,25 +120,25 @@ fig4 = px.line(df_price, x="Date", y="Unit Selling Price (RMB/kg)", title="Avera
 st.plotly_chart(fig4, use_container_width=True)
 
 # Con/sin descuento
-st.header("🎯 Comparación de ventas con y sin descuento")
+st.header("🎯 Comparison of sales with and without discount")
 df_discount = df_profitable.groupby("Discount (Yes/No)")["Quantity Sold (kilo)"].sum().reset_index()
-fig5 = px.bar(df_discount, x="Discount (Yes/No)", y="Quantity Sold (kilo)", title="Ventas con y sin descuento")
+fig5 = px.bar(df_discount, x="Discount (Yes/No)", y="Quantity Sold (kilo)", title="Sales with and without discount")
 st.plotly_chart(fig5, use_container_width=True)
 
 # Top productos y series por producto
-st.header("📦 Top 10 productos por cantidad vendida")
+st.header("📦 Top 10 products by quantity sold")
 df_top = df_profitable.groupby("Item Name")["Quantity Sold (kilo)"].sum().reset_index().sort_values(
     by="Quantity Sold (kilo)", ascending=False).head(10)
-fig6 = px.bar(df_top, x="Item Name", y="Quantity Sold (kilo)", title="Top 10 productos más vendidos")
+fig6 = px.bar(df_top, x="Item Name", y="Quantity Sold (kilo)", title="Top 10 best-selling products")
 st.plotly_chart(fig6, use_container_width=True)
 
-st.header("📈 Ventas por producto a lo largo del tiempo")
+st.header("📈 Sales by product over time")
 df_serie = df_profitable.groupby(["Date", "Item Name"])["Quantity Sold (kilo)"].sum().reset_index()
-fig7 = px.line(df_serie, x="Date", y="Quantity Sold (kilo)", color="Item Name", title="Ventas por producto en el tiempo")
+fig7 = px.line(df_serie, x="Date", y="Quantity Sold (kilo)", color="Item Name", title="Sales by product over time")
 st.plotly_chart(fig7, use_container_width=True)
 
 # Recomendaciones automáticas
-st.header("🧠 Recomendaciones automáticas")
+st.header("🧠 Automatic recommendations")
 df_recomendation = df_profitable.merge(df_retail_price, on=["Item Code", "Date"], how="left")
 df_recomendation["Margen por kg"] = df_recomendation["Unit Selling Price (RMB/kg)"] - df_recomendation["Wholesale Price (RMB/kg)"]
 
