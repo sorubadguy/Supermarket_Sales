@@ -71,6 +71,38 @@ fig2.update_layout(
 )
 st.plotly_chart(fig2, use_container_width=True)
 
+st.markdown("""
+    ## 📊 Sales vs. Loss Rate Analysis by Product
+
+    This chart combines the **total quantity sold (in thousands of kilograms)** with the **loss rate (%)** per product, allowing a clear visualization and assessment of    each product's performance.
+
+    ### ✅ Key Findings:
+
+    1. **No direct correlation between sales and loss**
+       - Many high-demand products show low loss rates.
+       - Others, with low sales, exhibit high loss rates.
+       - 👉 This suggests that product popularity does not necessarily lead to higher spoilage.
+
+    2. **Low-selling, high-loss products**
+       - Some products have low rotation and high spoilage rates.
+       - 🎯 These are optimization opportunities, as they may generate more loss than revenue.
+
+    3. **Efficient products**
+       - Some products have large sales volumes and very low loss rates.
+       - 🟢 These are ideal for maintaining in stock, promoting, or using as benchmarks for efficient inventory management.
+
+    4. **Extreme loss values**
+       - There are peaks in loss rates above 20–30%.
+       - 🔍 These products should be reviewed: they might be perishable, poorly stored, or in low demand.
+
+    ---
+
+    ### 💡 Recommendations:
+    - Review products with extremely high loss rates individually.
+    - Focus promotions and campaigns on top-performing products.
+    - Consider discontinuing low-selling, high-loss products.
+""")
+
 # Preparation for profitability analysis
 df_profitable = df_sales[df_sales["Sale or Return"] == "sale"].drop(['Time', 'Sale or Return'], axis=1)
 df_profitable = df_profitable.groupby(["Date", "Item Code", "Unit Selling Price (RMB/kg)", "Discount (Yes/No)"], as_index=False)['Quantity Sold (kilo)'].sum()
